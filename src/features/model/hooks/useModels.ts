@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useModelService } from "../services/modelService";
 import { Model } from "../types/modelTypes";
+import { Alert } from "react-native";
 
 export function useModels(brandId: string) {
     const [models, setModels] = useState<Model[]>([]);
@@ -14,6 +15,10 @@ export function useModels(brandId: string) {
                 setModels(data);
             } catch (err) {
                 console.error(err);
+                Alert.alert(
+                    "Erro",
+                    "Não foi possível carregar os modelos da marca. Tente novamente mais tarde."
+                );
             } finally {
                 setLoading(false);
             }
