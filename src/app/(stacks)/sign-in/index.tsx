@@ -1,24 +1,19 @@
-import React, { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useState } from "react";
+import { Controller } from "react-hook-form";
 import {
   ImageBackground,
   KeyboardAvoidingView,
   Platform,
-  Alert,
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import { useSignInValidation } from "@/features/sign-in/hooks/useSignInValidation";
 import { useSubmitSignIn } from "@/features/sign-in/hooks/useSubmitSignIn";
+import { colors } from "@/styles/colors";
+import styled from "styled-components/native";
 
 export default function SignInScreen() {
   const { handleSubmitSignIn, control } = useSubmitSignIn();
-
-  const router = useRouter();
-
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -40,7 +35,7 @@ export default function SignInScreen() {
                 <Feather
                   name="user"
                   size={20}
-                  color="#000"
+                  color={colors.text.primary}
                   style={{ marginRight: 8 }}
                 />
                 <Controller
@@ -49,7 +44,7 @@ export default function SignInScreen() {
                   render={({ field: { onChange, value } }) => (
                     <Input
                       placeholder="Nome"
-                      placeholderTextColor="#999"
+                      placeholderTextColor={colors.text.placeholder}
                       value={value}
                       onChangeText={onChange}
                     />
@@ -61,7 +56,7 @@ export default function SignInScreen() {
                 <Feather
                   name="lock"
                   size={20}
-                  color="#000"
+                  color={colors.text.primary}
                   style={{ marginRight: 8 }}
                 />
                 <Controller
@@ -70,7 +65,7 @@ export default function SignInScreen() {
                   render={({ field: { onChange, value } }) => (
                     <Input
                       placeholder="Senha"
-                      placeholderTextColor="#999"
+                      placeholderTextColor={colors.text.placeholder}
                       value={value}
                       onChangeText={onChange}
                       secureTextEntry={!showPassword}
@@ -83,7 +78,7 @@ export default function SignInScreen() {
                   <Feather
                     name={showPassword ? "eye-off" : "eye"}
                     size={20}
-                    color="#000"
+                    color={colors.text.primary}
                     style={{ marginLeft: 8 }}
                   />
                 </TouchableOpacity>
@@ -109,7 +104,7 @@ const Overlay = styled.View`
 
 const Card = styled.View`
   width: 90%;
-  background-color: #fff;
+  background-color: ${colors.background.white};
   padding: 24px;
   border-radius: 16px;
   align-items: center;
@@ -125,7 +120,7 @@ const InputGroup = styled.View`
   width: 100%;
   flex-direction: row;
   align-items: center;
-  background-color: #f2f2f2;
+  background-color: ${colors.background.light};
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 16px;
@@ -134,19 +129,19 @@ const InputGroup = styled.View`
 const Input = styled.TextInput`
   flex: 1;
   font-size: 16px;
-  color: #000;
+  color: ${colors.text.primary};
 `;
 
 const LoginButton = styled.TouchableOpacity`
   width: 100%;
-  background-color: #000;
+  background-color: ${colors.text.primary};
   padding: 14px;
   border-radius: 8px;
   align-items: center;
 `;
 
 const LoginButtonText = styled.Text`
-  color: #fff;
+  color: ${colors.background.white};
   font-size: 16px;
   font-weight: bold;
 `;

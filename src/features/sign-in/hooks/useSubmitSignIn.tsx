@@ -9,10 +9,7 @@ export function useSubmitSignIn() {
   const { signIn } = useAuth();
   const router = useRouter();
 
-  // Função que será executada com os dados validados
   const onSubmit = async (data: LoginPayload) => {
-    console.log("🚀 Dados do login:", data); // ← Agora valores corretos
-
     try {
       await signIn(data.user, data.password);
       reset();
@@ -23,7 +20,7 @@ export function useSubmitSignIn() {
   };
 
   return {
-    handleSubmitSignIn: handleSubmit(onSubmit), // ← aqui a mágica
+    handleSubmitSignIn: handleSubmit(onSubmit),
     control,
     resetForm: reset,
   };
