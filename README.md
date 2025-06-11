@@ -10,7 +10,6 @@ Aplicação móvel desenvolvida com React Native e Expo para consulta de marcas 
 - Visualização de modelos por marca
 - Busca de modelos com filtro em tempo real
 - Design responsivo com tratamento de área segura
-- Suporte a tema claro/escuro
 
 ## Tecnologias
 
@@ -23,6 +22,8 @@ Aplicação móvel desenvolvida com React Native e Expo para consulta de marcas 
 - Axios
 - AsyncStorage
 - Context API
+- Jest
+- Testing Library React Native
 
 ## Estrutura do Projeto
 
