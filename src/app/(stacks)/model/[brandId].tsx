@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ActivityIndicator, FlatList, SafeAreaView } from "react-native";
 import { colors } from "@/styles/colors";
 import { Feather } from "@expo/vector-icons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import SearchBar from "@/components/SearchBar";
 
@@ -14,6 +15,7 @@ export default function ModelScreen() {
   }>();
   const { models, loading } = useModels(brandId!);
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   const [search, setSearch] = useState("");
 
@@ -22,7 +24,7 @@ export default function ModelScreen() {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, paddingTop: insets.top }}>
       <Container>
         <HeaderRow>
           <BackButton onPress={() => router.back()}>

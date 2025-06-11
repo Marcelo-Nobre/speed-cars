@@ -10,14 +10,17 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { useSubmitSignIn } from "@/features/sign-in/hooks/useSubmitSignIn";
 import { colors } from "@/styles/colors";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
 export default function SignInScreen() {
   const { handleSubmitSignIn, control } = useSubmitSignIn();
   const [showPassword, setShowPassword] = useState(false);
 
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, paddingTop: insets.top }}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={{ flex: 1 }}

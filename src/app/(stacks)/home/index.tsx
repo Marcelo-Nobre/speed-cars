@@ -1,26 +1,23 @@
 import { useState } from "react";
-import {
-  SafeAreaView,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
+import { SafeAreaView, FlatList, ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "expo-router";
 import { useBrands } from "@/features/brand/hooks/useBrands";
 import { colors } from "@/styles/colors";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SearchBar from "@/components/SearchBar";
 import ConfirmModal from "@/components/ConfirmModal";
 
 export default function HomeScreen() {
   const { user, signOut } = useAuth();
-  const router = useRouter();
   const { brands, loading } = useBrands();
+  const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   const [search, setSearch] = useState("");
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
-
   const handleLogout = async () => {
     await signOut();
     setLogoutModalVisible(false);
@@ -36,7 +33,7 @@ export default function HomeScreen() {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, paddingTop: insets.top }}>
       <Container>
         <TopRow>
           <WelcomeText>Olá, {user?.name}</WelcomeText>
@@ -64,7 +61,9 @@ export default function HomeScreen() {
             data={filteredBrands}
             keyExtractor={(item) => item.codigo}
             renderItem={({ item }) => (
-              <BrandCard onPress={() => handleBrandPress(item.codigo, item.nome)}>
+              <BrandCard
+                onPress={() => handleBrandPress(item.codigo, item.nome)}
+              >
                 <BrandText>{item.nome}</BrandText>
               </BrandCard>
             )}
